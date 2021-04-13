@@ -1,8 +1,8 @@
  #include <OneWire.h>
     #include <DallasTemperature.h>
 
-    //GPIO pin 15 is set as OneWire bus
-    OneWire ourWire1(15);  
+    //GPIO pin 5 is set as OneWire bus
+    OneWire ourWire1(5);  
     //GPIO pin 4 is set as OneWire bus             
     OneWire ourWire2(4);                
 
