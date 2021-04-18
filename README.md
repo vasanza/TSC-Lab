@@ -1,5 +1,5 @@
 # Related work
-- https://vasanza.blogspot.com/
+- https://tsc-lab.blogspot.com/
 
 # IDE
 - Arduino 1..8.13
