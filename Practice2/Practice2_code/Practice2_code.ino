@@ -40,10 +40,11 @@ void setup() {
   pinMode(16, OUTPUT);
   //transitor 2
   pinMode(17, OUTPUT);
+  Serial.println("Choose any case: ");
 }
 
 void loop() {
-  Serial.println("Choose any case: ");
+  
   if (Serial.available())
   {
     String string = Serial.readStringUntil('\n');
@@ -59,6 +60,7 @@ void loop() {
         readData();
       }
       Serial.println("Case 1 finished");
+      Serial.println("Choose any case: ");
 
     }
     if (string == "case_2") {
@@ -75,6 +77,7 @@ void loop() {
         readData();
       }
       Serial.println("Case 2 finished");
+      Serial.println("Choose any case: ");
     }
     if (string == "case_3") {
       Serial.println("Case 3 started");
@@ -90,6 +93,7 @@ void loop() {
         readData();
       }
       Serial.println("Case 3 finished");
+      Serial.println("Choose any case: ");
     }
     if (string == "case_4") {
       Serial.println("Case 4 started");
@@ -111,6 +115,7 @@ void loop() {
         readData();
       }
       Serial.println("Case 4 finished");
+      Serial.println("Choose any case: ");
     }
 
   }
