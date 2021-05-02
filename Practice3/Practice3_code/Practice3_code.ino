@@ -1,10 +1,11 @@
 /*
    ****************************** TSC-Lab *******************************
 
-   ***************************** PRACTICE 2 *****************************
-   This practice is about USB DATA ACQUISITION about one case:
+   ***************************** PRACTICE 3 *****************************
+   This practice is about USB DATA ACQUISITION and have 2 different cases:
 
     • Case 1: Ambient temperature reading using sensor 1 and 2
+    • Case 2: Activation of Transistor 1 and Reading of temperature sensor 1 and 2
 
    By: Kevin E. Chica O
    More information: https://tsc-lab.blogspot.com/
@@ -63,8 +64,24 @@ void loop() {
       Serial.println("Case 1 finished");
       Serial.println("Choose any case: ");
 
+    }
+    else if (string == "case_2") {
+      Serial.println("Case 2 started");
+
+      for (int i = 1; i <= 10; i++) {
+        //transistor 1 activate
+        digitalWrite(16, HIGH);
+        t1 = 1;
+        readData();
+        //transistor 1 deactivate
+        t1 = 0;
+        digitalWrite(16, LOW);
+        readData();
+      }
+      Serial.println("Case 2 finished");
+      Serial.println("Choose any case: ");
     }   
-       
+    
   }
 
 }
