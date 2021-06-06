@@ -94,7 +94,7 @@ void setup() {
     ,  NULL                  // INITIAL parameter to receive (void *)
     ,  1                     // Priority, priority = 3 (configMAX_PRIORITIES - 1) is the highest, priority = 0 is the lowest.
     ,  &TaskEnviar_Handler   // Variable that points to the task (optional)
-    , 0);                     //core 0
+    , 1);                     //core 0
   xTaskCreatePinnedToCore(
     RPM
     ,  "RPM"              // Descriptive name of the function (MAX 8 characters)
@@ -102,7 +102,7 @@ void setup() {
     ,  NULL              // INITIAL parameter to receive (void *)
     ,  1                 // Priority, priority = 3 (configMAX_PRIORITIES - 1) is the highest, priority = 0 is the lowest.
     ,  NULL              // Variable that points to the task (optional)
-    , 0);                // core 0
+    , 1);                // core 0
 
   vTaskSuspend(TaskEnviar_Handler);
 
@@ -138,9 +138,9 @@ void enviar( void *pvParameters ) {
   for (;;) {
     temp = cnt / delay_cnt;
     vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
-    Valor_Hz = 2 * 1000 / temp; // Por que usamos dos flancos positivos
+    Valor_Hz = 2 * 1000 / temp; // Because we use two positive edges
     vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
-    Valor_RPM = 60 * Valor_Hz; // Calculo para los 60Segundos
+    Valor_RPM = 60 * Valor_Hz; // Calculation for 60 seconds
 
     vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
     //Serial.println("Valor del cnt es: " + String(cnt ));

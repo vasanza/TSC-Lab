@@ -89,7 +89,7 @@ void setup() {
     ,  NULL                  // INITIAL parameter to receive (void *)
     ,  1                     // Priority, priority = 3 (configMAX_PRIORITIES - 1) is the highest, priority = 0 is the lowest.
     ,  &TaskEnviar_Handler   // Variable that points to the task (optional)
-    , 0);                     //core 0
+    , 1);                     //core 1
   xTaskCreatePinnedToCore(
     RPM
     ,  "RPM"              // Descriptive name of the function (MAX 8 characters)
@@ -97,7 +97,7 @@ void setup() {
     ,  NULL              // INITIAL parameter to receive (void *)
     ,  1                 // Priority, priority = 3 (configMAX_PRIORITIES - 1) is the highest, priority = 0 is the lowest.
     ,  NULL              // Variable that points to the task (optional)
-    , 0);                // core 0
+    , 1);                // core 0
 
   vTaskSuspend(TaskEnviar_Handler);
 
