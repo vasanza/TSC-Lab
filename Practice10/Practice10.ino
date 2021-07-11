@@ -1,7 +1,7 @@
 /*
    ****************************** TSC-Lab *******************************
-   ***************************** PRACTICE 9 *****************************
-   This practice is about initial setups and tests (ON/OFF) of speed control lab
+   ***************************** PRACTICE 10 *****************************
+   This practice is about data acquisition with square velocity input
    By: Kevin E. Chica O
    More information: https://tsc-lab.blogspot.com/
 */
@@ -12,8 +12,7 @@ int period = 13000;
 int cycles = 10;
 
 
-//tasking
-TaskHandle_t TaskEnviar_Handler;
+
 
 //separador library
 #include <Separador.h>
@@ -38,26 +37,19 @@ const int resolution = 8;
 //move
 String move_motor = "counterclockwise";
 
-//encoder
-int LED_B0 = 27;
-
-int min_max_delay_ms[] = {500, 1000};
-int delay_cnt = 10;// Ancho de banda [2Hz - 1KHz]
-
-int delay_led = 250;
-float Valor_RPM = 0;
-float Valor_Hz = 0;
-int cnt = 1;
-float temp = 0;
-bool anterior = LOW;
-int band = 0;
+int encoder = 27;
 
 void motor( void *pvParameters );
-void enviar( void *pvParameters );
+//void enviar( void *pvParameters );
 void RPM( void *pvParameters );
 
-void motor( void *pvParameters );
+volatile int counter = 0;
 
+
+void interruption()    // Function that runs during each interrupt
+{
+  counter++;           
+}
 
 void setup() {
   Serial.begin(115200);
@@ -74,7 +66,7 @@ void setup() {
 
 
 
-
+  attachInterrupt(encoder, interruption, RISING);
 
 
   xTaskCreatePinnedToCore(
@@ -87,15 +79,7 @@ void setup() {
     , 1);                // core 1
 
 
-  xTaskCreatePinnedToCore(
-    enviar
-    ,  "envioIOT"             // Descriptive name of the function (MAX 8 characters)
-    ,  2048                   // Size required in STACK memory
-    ,  NULL                  // INITIAL parameter to receive (void *)
-    ,  1                     // Priority, priority = 3 (configMAX_PRIORITIES - 1) is the highest, priority = 0 is the lowest.
-    ,  &TaskEnviar_Handler   // Variable that points to the task (optional)
-    , 1);                     //core 0
-  xTaskCreatePinnedToCore(
+   xTaskCreatePinnedToCore(
     RPM
     ,  "RPM"              // Descriptive name of the function (MAX 8 characters)
     ,  2048              // Size required in STACK memory
@@ -104,7 +88,7 @@ void setup() {
     ,  NULL              // Variable that points to the task (optional)
     , 1);                // core 0
 
-  vTaskSuspend(TaskEnviar_Handler);
+  
 
 }
 
@@ -133,48 +117,14 @@ void motor( void *pvParameters ) {
   }
 }
 
-
-void enviar( void *pvParameters ) {
-  for (;;) {
-    temp = cnt / delay_cnt;
-    vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
-    Valor_Hz = 2 * 1000 / temp; // Because we use two positive edges
-    vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
-    Valor_RPM = 60 * Valor_Hz; // Calculation for 60 seconds
-
-    vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
-    //Serial.println("Valor del cnt es: " + String(cnt ));
-    vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
-    //Serial.println("Valor de frecuencia en Hz es: " + String(Valor_Hz));
-    vTaskDelay(1 / portTICK_PERIOD_MS); //<--------------------------------------------------------------
-    //Serial.println("Valor de las RPM es: " + String(Valor_RPM ));
-
-    Serial.print(Valor_RPM);
-    Serial.print(",");
-    Serial.println(motor_status);
-
-    band = 0;
-    cnt = 0;
-    vTaskSuspend(TaskEnviar_Handler);
-  }
-}
-
 void RPM( void *pvParameters ) {
   while (1) {
 
-    if (anterior == LOW && digitalRead(LED_B0) == HIGH ) {
-      band += 1; //cambia cuando existe un flanco positivo
-    }
-    anterior = digitalRead(LED_B0);
+    vTaskDelay(999);
+    Serial.print(counter * 60); 
+    Serial.print(",");
+    Serial.println(motor_status);    
+    counter = 0;
 
-    if (band == 1) { //En el primer flanco positivo
-      vTaskDelay(delay_cnt  / portTICK_PERIOD_MS);
-      cnt += 1;
-    }
-
-    if (band == 2) { //En el segundo flanco positivo
-      vTaskResume(TaskEnviar_Handler);
-      vTaskDelay(500 / portTICK_PERIOD_MS);
-    }
   }
 }
