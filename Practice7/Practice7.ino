@@ -3,7 +3,10 @@
    ***************************** PRACTICE 7 *****************************
    This practice is about speed control using PWM
    By: Kevin E. Chica O
+   Reviewed: Víctor Asanza
    More information: https://tsc-lab.blogspot.com/
+   More examples: https://github.com/vasanza/TSC-Lab
+   Dataset: http://ieee-dataport.org/4138
 */
 
 //motor
