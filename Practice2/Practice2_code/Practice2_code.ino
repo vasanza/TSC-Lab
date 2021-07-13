@@ -7,7 +7,10 @@
     • Case 1: Ambient temperature reading using sensor 1 and 2
 
    By: Kevin E. Chica O
+   Reviewed: Víctor Asanza
    More information: https://tsc-lab.blogspot.com/
+   More examples: https://github.com/vasanza/TSC-Lab
+   Dataset: http://ieee-dataport.org/4138
 */
 
 #include <OneWire.h>
