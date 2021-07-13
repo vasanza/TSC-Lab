@@ -4,6 +4,8 @@
    This practice is about data acquisition with square velocity input
    By: Kevin E. Chica O
    More information: https://tsc-lab.blogspot.com/
+   More examples: https://github.com/vasanza/TSC-Lab
+   Dataset: http://ieee-dataport.org/4138
 */
 //initial setting for data acquisition
 int dutyCycleInitial = 255;
