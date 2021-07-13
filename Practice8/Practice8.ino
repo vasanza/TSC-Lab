@@ -3,7 +3,10 @@
    ***************************** PRACTICE 8 *****************************
    This practice is about motor direction control and Speed control
    By: Kevin E. Chica O
+   Reviewed: Víctor Asanza
    More information: https://tsc-lab.blogspot.com/
+   More examples: https://github.com/vasanza/TSC-Lab
+   Dataset: http://ieee-dataport.org/4138
 */
 
 
