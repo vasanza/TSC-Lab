@@ -1,4 +1,8 @@
- #include <OneWire.h>
+// TSC-LAB
+// Blog: https://tsc-lab.blogspot.com
+// More examples: https://github.com/vasanza/TSC-Lab
+// Dataset: http://ieee-dataport.org/4138
+#include <OneWire.h>
     #include <DallasTemperature.h>
 
     //GPIO pin 5 is set as OneWire bus
