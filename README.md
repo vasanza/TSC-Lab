@@ -3,6 +3,7 @@
 
 # Open hardware Certification:
 - https://certification.oshwa.org/ec000003.html
+![OSHWA TSC-LAB](https://user-images.githubusercontent.com/12642226/125882285-f6efa755-aa6a-4058-a728-ef3f6797d828.PNG)
 
 # About TSC-Lab
 ![TSC-Lab 2](https://user-images.githubusercontent.com/12642226/125880387-bce3a793-99db-49d7-bb8b-49a1054c2bcd.jpeg)
