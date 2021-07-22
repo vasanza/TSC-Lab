@@ -9,6 +9,12 @@
 ![TSC-Lab 2](https://user-images.githubusercontent.com/12642226/125880387-bce3a793-99db-49d7-bb8b-49a1054c2bcd.jpeg)
 - The Temperature and Speed Control Lab (TSC-Lab) is an application of feedback control with an ESP32, an LED, two heaters, two temperature sensors, one direct current motor and an optical encoder as a revolution per minute (rpm) meter. The heater power output is adjusted to maintain the desired temperature setpoint. Thermal energy from the heater is transferred by conduction, convection, and radiation to the temperature sensor. Heat is also transferred away from the device to the surroundings. On the other hand, the motor speed is adjusted using a motor driver and with PWM signals, allowing the reference speed to be reached using the rpm meter.
 
+# PCB (Top Layer)
+![PCB1](https://user-images.githubusercontent.com/12642226/126721763-297964b8-fddd-44ac-bcb2-fc0faf23f657.jpeg)
+
+# PCB (Bottom Layer)
+![PCB2](https://user-images.githubusercontent.com/12642226/126721773-6225999e-0387-4de8-9035-af233ec85429.jpeg)
+
 # Web page
 - http://www.tsc-lab.com/
 
