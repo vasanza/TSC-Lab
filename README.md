@@ -16,6 +16,9 @@
 # PCB (Bottom Layer)
 ![PCB2](https://user-images.githubusercontent.com/12642226/126721773-6225999e-0387-4de8-9035-af233ec85429.jpeg)
 
+# 3D printed parts
+![TSC-Lab1](https://user-images.githubusercontent.com/12642226/127238189-85f5a6b9-9c4a-4691-ac9a-016595989c77.jpeg)
+
 # Web page
 - http://www.tsc-lab.com/
 
