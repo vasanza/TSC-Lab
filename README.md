@@ -1,4 +1,5 @@
-# #TSCLab #TSC_Lab #TSC
+# ⭐⭐⭐⭐⭐ TEMPERATURE AND SPEED CONTROL LAB (TSC-LAB)
+- ➡️ #TSCLab #TSC_Lab #TSCLAB #TSC
 # Open Source Licenses
 ![oshw_facts](https://user-images.githubusercontent.com/12642226/125852085-3a7f231a-8880-493a-b49e-cc512080cc3e.png)
 
