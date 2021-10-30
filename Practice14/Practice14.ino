@@ -1,13 +1,8 @@
 /*
    ****************************** TSC-Lab *******************************
 
-   ***************************** PRACTICE 5 *****************************
-   This practice is about USB DATA ACQUISITION and have 4 different cases:
-
-    • Case 1: Ambient temperature reading using sensor 1 and 2
-    • Case 2: Activation of Transistor 1 and Reading of temperature sensor 1 and 2
-    • Case 3: Activation of Transistor 2 and Reading of temperature sensor 1 and 2
-    • Case 4: Activation of Transistor 1 and 2, also Reading of temperature sensor 1 and 2
+   ***************************** PRACTICE 14 *****************************
+   This practice is about  ThingSpeak (Http) connection
 
    By: Kevin E. Chica O
    Reviewed: Víctor Asanza
@@ -19,7 +14,7 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-//GPIO pin 0 is set as OneWire bus
+//GPIO pin 0clie is set as OneWire bus
 OneWire ourWire1(0);
 //GPIO pin 4 is set as OneWire bus
 OneWire ourWire2(4);
@@ -35,7 +30,19 @@ int t2 = 0;
 
 //set parameters
 int period=12; //medium period
-int freq=100;  // sampling time
+int freq=20000;  // sampling time
+
+// WiFi
+#include <WiFi.h>
+WiFiClient  client;
+const char *ssid = "Chica Orellana"; // Enter your WiFi name
+const char *password = "ManchasyBombon1998";  // Enter WiFi password
+
+#include "ThingSpeak.h" // always include thingspeak header file after other header files and custom macros
+
+unsigned long myChannelNumber = 1523638;    //your ID
+const char * myWriteAPIKey = "AQ1OY0GGI3F0HCHO"; // your API-KEY
+
 
 void setup() {
   delay(1000);
@@ -47,11 +54,17 @@ void setup() {
   pinMode(16, OUTPUT);
   //transitor 2
   pinMode(17, OUTPUT);
+  
+
+  //wifi
+  WiFi.mode(WIFI_STA); 
+  connect_wifi();
+  ThingSpeak.begin(client);  // Initialize ThingSpeak
+
   Serial.println("Choose any case: ");
 }
 
 void loop() {
-  
   if (Serial.available())
   {
     String string = Serial.readStringUntil('\n');
@@ -136,6 +149,7 @@ void readData() {
   uint32_t timer = period * 60000L;      
 
   for ( uint32_t tStart = millis();  (millis() - tStart) < timer;  ) {
+    connect_wifi();
     //The command is sent to read the temperature
     sensors1.requestTemperatures();
     //Obtain the temperature in ºC of sensor 1
@@ -154,7 +168,48 @@ void readData() {
     Serial.print(t1);
     Serial.print(",");
     Serial.println(t2);
+    public_ThingSpeak(temp1,temp2,t1,t2);
     delay(freq);
   }
 
+}
+
+void connect_wifi(){
+  // Connect or reconnect to WiFi
+  if(WiFi.status() != WL_CONNECTED){
+    Serial.print("Attempting to connect to SSID: ");
+    Serial.println(ssid);
+    while(WiFi.status() != WL_CONNECTED){
+      WiFi.begin(ssid, password);  // Connect to WPA/WPA2 network. Change this line if using open or WEP network
+      Serial.print(".");
+      delay(5000);     
+    } 
+    Serial.println("\nConnected.");
+  }
+}
+
+
+void public_ThingSpeak(float temp1,float temp2, int trans1, int trans2){
+  // set the fields with the values
+  ThingSpeak.setField(1, (temp1));
+  ThingSpeak.setField(2, (temp2));
+  ThingSpeak.setField(3, (trans1));
+  ThingSpeak.setField(4, (trans2));
+  
+
+ 
+  
+  // write to the ThingSpeak channel
+  int x = ThingSpeak.writeFields(myChannelNumber, myWriteAPIKey);
+  if(x == 200){
+    Serial.println("Channel update successful.");
+  }
+  else{
+    Serial.println("Problem updating channel. HTTP error code " + String(x));
+  }
+  
+  
+  
+  //delay(20000); // Wait 20 seconds to update the channel again
+  
 }
