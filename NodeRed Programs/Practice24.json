@@ -1,0 +1,86 @@
+[
+    {
+        "id": "3a1bc3a5d3b52d64",
+        "type": "tab",
+        "label": "Practice24",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "6647146014c4e95d",
+        "type": "serial in",
+        "z": "3a1bc3a5d3b52d64",
+        "name": "",
+        "serial": "f680073c121c8389",
+        "x": 170,
+        "y": 240,
+        "wires": [
+            [
+                "3404139cf3cba354"
+            ]
+        ]
+    },
+    {
+        "id": "3404139cf3cba354",
+        "type": "ui_gauge",
+        "z": "3a1bc3a5d3b52d64",
+        "name": "",
+        "group": "4ffdcb2b0d051d5f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Motor",
+        "label": "RPM",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "8000",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 360,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f680073c121c8389",
+        "type": "serial-port",
+        "serialport": "COM3",
+        "serialbaud": "115200",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "4ffdcb2b0d051d5f",
+        "type": "ui_group",
+        "name": "TSC-Lab",
+        "tab": "999df84fcc724d7f",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "999df84fcc724d7f",
+        "type": "ui_tab",
+        "name": "Temperatures",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
