@@ -1,15 +1,15 @@
 [
     {
-        "id": "4e6603f0f49408c9",
+        "id": "e5bf6254a0e0f1fb",
         "type": "tab",
         "label": "Practice25",
         "disabled": false,
         "info": ""
     },
     {
-        "id": "a30a5232da236b1c",
+        "id": "33b7fba1243f4704",
         "type": "http response",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "statusCode": "200",
         "headers": {},
@@ -18,9 +18,9 @@
         "wires": []
     },
     {
-        "id": "c73fdcce98c99fc2",
+        "id": "e75629d3ad5d14c7",
         "type": "json",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "property": "payload",
         "action": "obj",
@@ -29,14 +29,14 @@
         "y": 440,
         "wires": [
             [
-                "e807ef85b135fe75"
+                "2b37200edcd15d64"
             ]
         ]
     },
     {
-        "id": "4a7a40d1f1c933c8",
+        "id": "3a6ef7e414d17a8b",
         "type": "debug",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -51,9 +51,9 @@
         "wires": []
     },
     {
-        "id": "62f7c2402ae43a08",
+        "id": "4d01ffc5418d08bd",
         "type": "ui_text",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "group": "2b7ac01b.fc984",
         "order": 1,
         "width": 0,
@@ -67,9 +67,9 @@
         "wires": []
     },
     {
-        "id": "d43c3de4a94702aa",
+        "id": "79f6bf0b46205a7e",
         "type": "ui_gauge",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "group": "2b7ac01b.fc984",
         "order": 2,
@@ -93,9 +93,9 @@
         "wires": []
     },
     {
-        "id": "d31a1d7eda805941",
+        "id": "4ee5dadfb3a97443",
         "type": "ui_gauge",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "group": "2b7ac01b.fc984",
         "order": 3,
@@ -119,9 +119,9 @@
         "wires": []
     },
     {
-        "id": "e807ef85b135fe75",
+        "id": "2b37200edcd15d64",
         "type": "function",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "JSON or URL Encoded",
         "func": "var msg0 = { payload: msg.payload.api_key };\nvar msg1 = { payload: msg.payload.sensor };\nvar msg2 = { payload: msg.payload.value1 };\nvar msg3 = { payload: msg.payload.value2 };\n\n\nreturn [msg0, msg1, msg2, msg3];",
         "outputs": 4,
@@ -133,25 +133,25 @@
         "y": 440,
         "wires": [
             [
-                "4a7a40d1f1c933c8"
+                "3a6ef7e414d17a8b"
             ],
             [
-                "62f7c2402ae43a08"
+                "4d01ffc5418d08bd"
             ],
             [
-                "d43c3de4a94702aa",
-                "7416c211f88ef53a"
+                "79f6bf0b46205a7e",
+                "c959cbc2b151929f"
             ],
             [
-                "d31a1d7eda805941",
-                "a656017654cb2862"
+                "4ee5dadfb3a97443",
+                "7ad7da09923a9978"
             ]
         ]
     },
     {
-        "id": "45860c289febf653",
+        "id": "be16297b22d8e2b2",
         "type": "http in",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "url": "update-sensor",
         "method": "post",
@@ -161,16 +161,16 @@
         "y": 360,
         "wires": [
             [
-                "a30a5232da236b1c",
-                "c73fdcce98c99fc2",
-                "4a7a40d1f1c933c8"
+                "33b7fba1243f4704",
+                "e75629d3ad5d14c7",
+                "3a6ef7e414d17a8b"
             ]
         ]
     },
     {
-        "id": "7416c211f88ef53a",
+        "id": "c959cbc2b151929f",
         "type": "change",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "rules": [
             {
@@ -193,9 +193,9 @@
         ]
     },
     {
-        "id": "a656017654cb2862",
+        "id": "7ad7da09923a9978",
         "type": "change",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "rules": [
             {
@@ -218,16 +218,16 @@
         ]
     },
     {
-        "id": "941352c79b5edc9d",
+        "id": "65a75624c3f22ac0",
         "type": "telegram command",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "command": "temp1",
         "description": "",
         "registercommand": false,
         "language": "",
         "scope": "default",
-        "bot": "b210c79da6183814",
+        "bot": "459ef3396edd223e",
         "strict": false,
         "hasresponse": true,
         "useregex": false,
@@ -237,22 +237,22 @@
         "y": 620,
         "wires": [
             [
-                "63fc65e2866443a4"
+                "2cd9bc55bc9d2e36"
             ],
             []
         ]
     },
     {
-        "id": "3036f8a622cf3ae8",
+        "id": "c739c473f9f7f1b8",
         "type": "telegram command",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "command": "temp2",
         "description": "",
         "registercommand": false,
         "language": "",
         "scope": "default",
-        "bot": "b210c79da6183814",
+        "bot": "459ef3396edd223e",
         "strict": false,
         "hasresponse": true,
         "useregex": false,
@@ -262,17 +262,17 @@
         "y": 740,
         "wires": [
             [
-                "0aae0d763348f8fd"
+                "069cd15243a75ab7"
             ],
             []
         ]
     },
     {
-        "id": "63fc65e2866443a4",
+        "id": "2cd9bc55bc9d2e36",
         "type": "function",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
-        "func": "var temp = flow.get(\"temp1\")\nmsg.payload={\n    \"chatId\": -678832634,\n    \"type\": \"message\",\n    \"content\": \"Temperatura 1=\" + temp + \"°C\"\n}\nreturn msg;",
+        "func": "var temp = flow.get(\"temp1\")\nmsg.payload={\n    \"chatId\": 1345127422,\n    \"type\": \"message\",\n    \"content\": \"Temperatura 1=\" + temp + \"°C\"\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -282,16 +282,16 @@
         "y": 620,
         "wires": [
             [
-                "b77bce83f68e849e"
+                "79916ee3a55d54bd"
             ]
         ]
     },
     {
-        "id": "0aae0d763348f8fd",
+        "id": "069cd15243a75ab7",
         "type": "function",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
-        "func": "var temp = flow.get(\"temp2\")\nmsg.payload={\n    \"chatId\": -678832634,\n    \"type\": \"message\",\n    \"content\": \"Temperatura actual=\" + temp + \"°C\"\n}\nreturn msg;",
+        "func": "var temp = flow.get(\"temp2\")\nmsg.payload={\n    \"chatId\": 1345127422,\n    \"type\": \"message\",\n    \"content\": \"Temperatura actual=\" + temp + \"°C\"\n}\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -301,16 +301,16 @@
         "y": 740,
         "wires": [
             [
-                "a348cb806b9f6653"
+                "fe66230b64202503"
             ]
         ]
     },
     {
-        "id": "b77bce83f68e849e",
+        "id": "79916ee3a55d54bd",
         "type": "telegram sender",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
-        "bot": "b210c79da6183814",
+        "bot": "459ef3396edd223e",
         "haserroroutput": false,
         "outputs": 1,
         "x": 610,
@@ -320,11 +320,11 @@
         ]
     },
     {
-        "id": "a348cb806b9f6653",
+        "id": "fe66230b64202503",
         "type": "telegram sender",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
-        "bot": "b210c79da6183814",
+        "bot": "459ef3396edd223e",
         "haserroroutput": false,
         "outputs": 1,
         "x": 610,
@@ -334,26 +334,26 @@
         ]
     },
     {
-        "id": "c68f72863bd3036e",
+        "id": "0df5bd8227650d00",
         "type": "telegram receiver",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "TSC Lab",
-        "bot": "b210c79da6183814",
+        "bot": "459ef3396edd223e",
         "saveDataDir": "",
         "filterCommands": false,
         "x": 170,
         "y": 260,
         "wires": [
             [
-                "cc50202dd9aee6cb"
+                "df4c574dbcb6a1bd"
             ],
             []
         ]
     },
     {
-        "id": "cc50202dd9aee6cb",
+        "id": "df4c574dbcb6a1bd",
         "type": "debug",
-        "z": "4e6603f0f49408c9",
+        "z": "e5bf6254a0e0f1fb",
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -377,9 +377,9 @@
         "collapse": false
     },
     {
-        "id": "b210c79da6183814",
+        "id": "459ef3396edd223e",
         "type": "telegram bot",
-        "botname": "TscLab_bot",
+        "botname": "TscLabKechica_bot",
         "usernames": "",
         "chatids": "",
         "baseapiurl": "",

@@ -1,0 +1,67 @@
+[
+    {
+        "id": "e9220738e9e53d48",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "5db799c8d287d91a",
+        "type": "hostip",
+        "z": "e9220738e9e53d48",
+        "name": "Host IP",
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "ee648534eaadf164"
+            ]
+        ]
+    },
+    {
+        "id": "ee648534eaadf164",
+        "type": "debug",
+        "z": "e9220738e9e53d48",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "ccf686e18ec5d0d4",
+        "type": "inject",
+        "z": "e9220738e9e53d48",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 200,
+        "wires": [
+            [
+                "5db799c8d287d91a"
+            ]
+        ]
+    }
+]

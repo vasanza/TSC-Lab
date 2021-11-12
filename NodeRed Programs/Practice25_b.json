@@ -1,0 +1,169 @@
+[
+    {
+        "id": "021e16102e336059",
+        "type": "tab",
+        "label": "Practice25",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "84b48d722ece16bb",
+        "type": "http response",
+        "z": "021e16102e336059",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 400,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c77113a60fbd3a7e",
+        "type": "json",
+        "z": "021e16102e336059",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": true,
+        "x": 390,
+        "y": 440,
+        "wires": [
+            [
+                "14184e50244761a4"
+            ]
+        ]
+    },
+    {
+        "id": "a45744e284d3e398",
+        "type": "debug",
+        "z": "021e16102e336059",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "14184e50244761a4",
+        "type": "function",
+        "z": "021e16102e336059",
+        "name": "JSON or URL Encoded",
+        "func": "var msg0 = { payload: msg.payload.api_key };\nvar msg1 = { payload: msg.payload.sensor };\nvar msg2 = { payload: msg.payload.value1 };\nvar msg3 = { payload: msg.payload.value2 };\n\n\nreturn [msg0, msg1, msg2, msg3];",
+        "outputs": 4,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 440,
+        "wires": [
+            [
+                "a45744e284d3e398"
+            ],
+            [],
+            [
+                "f0b4db2bf0168e68"
+            ],
+            [
+                "f1e10e136e576e2c"
+            ]
+        ]
+    },
+    {
+        "id": "28cb8f4d9cc79430",
+        "type": "http in",
+        "z": "021e16102e336059",
+        "name": "",
+        "url": "update-sensor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 160,
+        "y": 360,
+        "wires": [
+            [
+                "84b48d722ece16bb",
+                "c77113a60fbd3a7e",
+                "a45744e284d3e398"
+            ]
+        ]
+    },
+    {
+        "id": "f1e10e136e576e2c",
+        "type": "ui_gauge",
+        "z": "021e16102e336059",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature 2",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#0080ff",
+            "#0062c4",
+            "#002f5e"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 840,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "f0b4db2bf0168e68",
+        "type": "ui_gauge",
+        "z": "021e16102e336059",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature 1",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 840,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "2b7ac01b.fc984",
+        "type": "ui_group",
+        "name": "SENSORS",
+        "tab": "99ab8dc5.f435c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "99ab8dc5.f435c",
+        "type": "ui_tab",
+        "name": "HTTP",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
