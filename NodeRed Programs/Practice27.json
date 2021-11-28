@@ -1,0 +1,265 @@
+[
+    {
+        "id": "ba980d16c46d9bc6",
+        "type": "tab",
+        "label": "Practice27",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d1dd1c50cc8b2e70",
+        "type": "http response",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 580,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "72bd534315f2308f",
+        "type": "json",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": true,
+        "x": 570,
+        "y": 360,
+        "wires": [
+            [
+                "ccab11f1123a6e3e"
+            ]
+        ]
+    },
+    {
+        "id": "22eae59ec34f37ef",
+        "type": "debug",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "679cb2ff3ea6bfb2",
+        "type": "ui_text",
+        "z": "ba980d16c46d9bc6",
+        "group": "2b7ac01b.fc984",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Sensor Name",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 1020,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a20cb57dad2ed141",
+        "type": "ui_gauge",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature 1",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1020,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c77fe706a8878968",
+        "type": "ui_gauge",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "group": "2b7ac01b.fc984",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperature 2",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "50",
+        "colors": [
+            "#0080ff",
+            "#0062c4",
+            "#002f5e"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1020,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ccab11f1123a6e3e",
+        "type": "function",
+        "z": "ba980d16c46d9bc6",
+        "name": "JSON or URL Encoded",
+        "func": "var msg0 = { payload: msg.payload.api_key };\nvar msg1 = { payload: msg.payload.sensor };\nvar msg2 = { payload: msg.payload.value1 };\nvar msg3 = { payload: msg.payload.value2 };\n\n\nreturn [msg0, msg1, msg2, msg3];",
+        "outputs": 4,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 360,
+        "wires": [
+            [
+                "22eae59ec34f37ef"
+            ],
+            [
+                "679cb2ff3ea6bfb2"
+            ],
+            [
+                "a20cb57dad2ed141",
+                "a8b1132a06d288c5"
+            ],
+            [
+                "c77fe706a8878968",
+                "12e10f31cb49ca8c"
+            ]
+        ]
+    },
+    {
+        "id": "07323f8a7b2f378d",
+        "type": "http in",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "url": "update-sensor",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "d1dd1c50cc8b2e70",
+                "72bd534315f2308f",
+                "22eae59ec34f37ef"
+            ]
+        ]
+    },
+    {
+        "id": "a8b1132a06d288c5",
+        "type": "change",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temp1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 380,
+        "wires": [
+            [
+                "da41a4cb691c2101"
+            ]
+        ]
+    },
+    {
+        "id": "12e10f31cb49ca8c",
+        "type": "change",
+        "z": "ba980d16c46d9bc6",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temp2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 500,
+        "wires": [
+            [
+                "79be0535db255ae8"
+            ]
+        ]
+    },
+    {
+        "id": "da41a4cb691c2101",
+        "type": "ThingspeakSendSimple",
+        "z": "ba980d16c46d9bc6",
+        "name": "https://thingspeak.com/channels/1587350",
+        "writekey": "PDQGWWCC5NHIIORH",
+        "fieldid": "1",
+        "x": 1300,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "79be0535db255ae8",
+        "type": "ThingspeakSendSimple",
+        "z": "ba980d16c46d9bc6",
+        "name": "https://thingspeak.com/channels/1587350",
+        "writekey": "PDQGWWCC5NHIIORH",
+        "fieldid": "2",
+        "x": 1300,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "2b7ac01b.fc984",
+        "type": "ui_group",
+        "name": "SENSORS",
+        "tab": "99ab8dc5.f435c",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "99ab8dc5.f435c",
+        "type": "ui_tab",
+        "name": "HTTP",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    }
+]
