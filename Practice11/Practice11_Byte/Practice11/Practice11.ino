@@ -14,17 +14,19 @@ Separador s;
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-//GPIO pin 0 is set as OneWire bus
-OneWire ourWire1(0);
 //GPIO pin 4 is set as OneWire bus
-OneWire ourWire2(4);
+OneWire ourWire1(4);
+//GPIO pin 0 is set as OneWire bus
+OneWire ourWire2(0);
 
 //A variable or object is declared for our sensor 1
 DallasTemperature sensors1(&ourWire1);
 //A variable or object is declared for our sensor 2
 DallasTemperature sensors2(&ourWire2);
 
-
+//Status of transistors
+int t1 = 0;
+int t2 = 0;
 //pins of transistor
 int trans1 = 17;
 int trans2 = 16;
@@ -33,11 +35,12 @@ int trans2 = 16;
 
 int dutyCycle1 = 0;
 int dutyCycle2 = 0;
-
+int band = 0;
 
 // Setting PWM properties
 const int freq = 30000;
-const int pwmChannel = 0;
+const int pwmChannell = 0;
+const int pwmChannel2 = 1;
 const int resolution = 8;
 
 
@@ -57,14 +60,14 @@ void setup() {
   //transistor 1
   pinMode(trans1, OUTPUT);
   //transitor 2
-  pinMode(trans2, OUTPUT);
+  pinMode(trans2, OUTPUT);;
 
   // configure LED PWM functionalitites
-  ledcSetup(pwmChannel, freq, resolution);
-
+  ledcSetup(pwmChannell, freq, resolution);
+  ledcSetup(pwmChannel2, freq, resolution);
   // attach the channel to the GPIO to be controlled
-  ledcAttachPin(trans1, pwmChannel);
-  ledcAttachPin(trans2, pwmChannel);
+  ledcAttachPin(trans1, pwmChannell);
+  ledcAttachPin(trans2, pwmChannel2);
 
   xTaskCreatePinnedToCore(
     transistor
@@ -100,8 +103,8 @@ void loop() {
 void transistor( void *pvParameters ) {
   while (1) {
 
-    ledcWrite(pwmChannel, dutyCycle1);
-    ledcWrite(pwmChannel, dutyCycle2);
+    ledcWrite(pwmChannell, dutyCycle1);
+    ledcWrite(pwmChannel2, dutyCycle2);
     //vTaskDelay(period);
   }
 }
@@ -113,15 +116,30 @@ void temperature( void *pvParameters ) {
     //Serial.println(counter * 60);//255 -> 0x32 0x35 0x35
     sensors1.requestTemperatures();
     //Obtain the temperature in ºC of sensor 1
-    float temp1 = sensors1.getTempCByIndex(0);
+    int temp1 = sensors1.getTempCByIndex(0);
 
     //The command is sent to read the temperature
     sensors2.requestTemperatures();
     //Obtain the temperature in ºC of sensor 2
-    float temp2 = sensors2.getTempCByIndex(0);
-    Serial.write((byte*)&temp1,4);//value temeprature 1
-    Serial.write((byte*)&temp2,4);//value temperature 2
+    int temp2 = sensors2.getTempCByIndex(0);
+    //Serial.write((byte*)&temp1,4);//value temeprature 1
+    //Serial.print("la banda es: ");//value temperature 1
+    //Serial.println(temp1);//value temperature 1
+    if (band == 0) {
+      //Serial.println("t1");
+      Serial.write(temp1);//value temperature 1
+      
+    } else if (band == 1) {
+      //Serial.println("t2");
+      Serial.write(temp2);//value temperature 2
+    } else if (band == 2) {
+      int tempProm = (temp1 + temp2) / 2;
+      //Serial.println("t1t2");
+      Serial.write(tempProm);//value temperature 2
+      tempProm = 0;
 
+
+    }
   }
 }
 
@@ -141,16 +159,19 @@ void pwm( void *pvParameters ) {
       int dutyCycle = s.separa(string, '_', 1).toInt();
       //dutyCycle = string.toInt();
       if (nameTrans == "t1") {
+        band = 0;
         dutyCycle1 = dutyCycle;
         dutyCycle2 = 0;
       } else if (nameTrans == "t2") {
+        band = 1;
         dutyCycle2 = dutyCycle;
         dutyCycle1 = 0;
       } else if (nameTrans == "t1t2") {
+        band = 2;
         dutyCycle1 = dutyCycle;
         dutyCycle2 = s.separa(string, '_', 2).toInt();
       }
-      
+
 
     }
   }
