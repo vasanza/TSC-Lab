@@ -1,66 +1,82 @@
 /*
    ****************************** TSC-Lab *******************************
-
    ***************************** PRACTICE 3 *****************************
-   This practice is about USB DATA ACQUISITION and have 2 different cases:
-
+   This practice is about USB DATA ACQUISITION and have 4 different cases:
     • Case 1: Ambient temperature reading using sensor 1 and 2
     • Case 2: Activation of Transistor 1 and Reading of temperature sensor 1 and 2
-
+    
    By: Kevin E. Chica O
-   Reviewed: Víctor Asanza
    More information: https://tsc-lab.blogspot.com/
-   More examples: https://github.com/vasanza/TSC-Lab
-   Dataset: http://ieee-dataport.org/4138
 */
 
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-//GPIO pin 0 is set as OneWire bus
-OneWire ourWire1(0);
 //GPIO pin 4 is set as OneWire bus
-OneWire ourWire2(4);
+OneWire ourWire1(4);
+//GPIO pin 0 is set as OneWire bus
+OneWire ourWire2(0);
 
 //A variable or object is declared for our sensor 1
 DallasTemperature sensors1(&ourWire1);
 //A variable or object is declared for our sensor 2
 DallasTemperature sensors2(&ourWire2);
 
-//Status of transistors
-int t1 = 0;
-int t2 = 0;
+
+//pins of transistor
+int trans1 = 17;
+int trans2 = 16;
 
 //set parameters
-int period=12; //medium period
-int freq=100;  // sampling time
+int period = 15; //medium period in minutes
+int freq_sampling = 100; // sampling time
+int ciclos = 20; // sampling time
+
+int dutyCycle1 = 0;
+int dutyCycle2 = 0;
+
+// Setting PWM properties
+const int freq = 30000;
+const int pwmChannell = 0;
+const int pwmChannel2 = 1;
+const int resolution = 8;
 
 void setup() {
   delay(1000);
   Serial.begin(115200);
+  
   sensors1.begin();   //Sensor 1 starts
   sensors2.begin();   //Sensor 2 starts
 
   //transistor 1
-  pinMode(16, OUTPUT);
+  pinMode(trans1, OUTPUT);
   //transitor 2
-  pinMode(17, OUTPUT);
+  pinMode(trans2, OUTPUT);
+
+  // configure LED PWM functionalitites
+  ledcSetup(pwmChannell, freq, resolution);
+  ledcSetup(pwmChannel2, freq, resolution);
+  // attach the channel to the GPIO to be controlled
+  ledcAttachPin(trans1, pwmChannell);
+  ledcAttachPin(trans2, pwmChannel2);
   Serial.println("Choose any case: ");
 }
 
 void loop() {
-  
+
   if (Serial.available())
   {
     String string = Serial.readStringUntil('\n');
 
     if (string == "case_1") {
       Serial.println("Case 1 started");
-      for (int i = 1; i <= 10; i++) {
+      for (int i = 1; i <= ciclos; i++) {
         //transistor 1 deactivate
-        t1 = 0;
+        dutyCycle1 = 0;
+        ledcWrite(pwmChannell, dutyCycle1);
         //transistor 2 deactivate
-        t2 = 0;
+        dutyCycle2 = 0;
+        ledcWrite(pwmChannel2, dutyCycle2);
         readData();
         readData();
       }
@@ -71,19 +87,20 @@ void loop() {
     else if (string == "case_2") {
       Serial.println("Case 2 started");
 
-      for (int i = 1; i <= 10; i++) {
+      for (int i = 1; i <= ciclos; i++) {
         //transistor 1 activate
-        digitalWrite(16, HIGH);
-        t1 = 1;
+        dutyCycle1 = 255;
+        ledcWrite(pwmChannell, dutyCycle1);
         readData();
         //transistor 1 deactivate
-        t1 = 0;
-        digitalWrite(16, LOW);
+        dutyCycle1 = 0;
+        ledcWrite(pwmChannel2, dutyCycle2);
         readData();
       }
       Serial.println("Case 2 finished");
       Serial.println("Choose any case: ");
-    }   
+    }
+    
     
   }
 
@@ -93,7 +110,7 @@ void loop() {
 //method to read data for 12 minute
 void readData() {
 
-  uint32_t timer = period * 60000L;      
+  uint32_t timer = period * 60000L;
 
   for ( uint32_t tStart = millis();  (millis() - tStart) < timer;  ) {
     //The command is sent to read the temperature
@@ -111,10 +128,10 @@ void readData() {
     Serial.print(",");
     Serial.print(temp2);
     Serial.print(",");
-    Serial.print(t1);
+    Serial.print(dutyCycle1);
     Serial.print(",");
-    Serial.println(t2);
-    delay(freq);
+    Serial.println(dutyCycle2);
+    delay(freq_sampling);
   }
 
 }

@@ -11,10 +11,13 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-//GPIO pin 0 is set as OneWire bus
-OneWire ourWire1(0);
 //GPIO pin 4 is set as OneWire bus
-OneWire ourWire2(4);
+OneWire ourWire1(4);
+//GPIO pin 0 is set as OneWire bus
+OneWire ourWire2(0);
+//pins of transistor
+int trans1 = 17;
+int trans2 = 16;
 
 //A variable or object is declared for our sensor 1
 DallasTemperature sensors1(&ourWire1);
@@ -38,19 +41,19 @@ void loop() {
   {
     String string = Serial.readStringUntil('\n');
     if (string == "t1_on") {
-      digitalWrite(16, HIGH);
+      digitalWrite(trans1, HIGH);
       Serial.println("Transistor 1 on");
     }
     if (string == "t1_off") {
-      digitalWrite(16, LOW);
+      digitalWrite(trans1, LOW);
       Serial.println("Transistor 1 off");
     }
     if (string == "t2_on") {
-      digitalWrite(17, HIGH);
+      digitalWrite(trans2, HIGH);
       Serial.println("Transistor 2 on");
     }
     if (string == "t2_off") {
-      digitalWrite(17, LOW);
+      digitalWrite(trans2, LOW);
       Serial.println("Transistor 2 off");
     }
 
