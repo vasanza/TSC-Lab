@@ -30,24 +30,25 @@
 - http://ieee-dataport.org/4138
 - http://ieee-dataport.org/4477
 
-# IDE
+# Repository technical specifications
+## IDE
 - Arduino 1..8.13
-
-# CORE
+## CORE
 - ESP32 - WROOM32
 
-# CLONE
+# Keynote
+## Clone
 - git status
 - git clone https://github.com/vasanza/TSC-Lab.git
 
-# SWITCHED TO BRANCH
+## Switched to Branch
 - git branch -a
 - git checkout NameBranch
 
-# New Branch
+## New Branch
 - git checkout -b NameBranch
 
-# PUSH
+## Push
 - git pull origin NameBranch
 - git status
 - git add .
