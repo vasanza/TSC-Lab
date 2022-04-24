@@ -31,10 +31,9 @@
 - http://ieee-dataport.org/4477
 
 # Repository technical specifications
-## IDE
-- Arduino 1..8.13
-## CORE
-- ESP32 - WROOM32
+- **IDE:** Arduino 1..8.13
+- **DEVICE:** TSC-LAB
+- **Hardware Core:** ESP32 - WROOM32
 
 # Keynote
 ## Clone
