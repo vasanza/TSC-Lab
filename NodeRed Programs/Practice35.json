@@ -1,0 +1,443 @@
+[
+    {
+        "id": "bb1c54631bee40cc",
+        "type": "tab",
+        "label": "Practice35",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "12d8e225f1ef4365",
+        "type": "mqtt in",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "topic": "tsclab/kechica",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "0a04e91a95aab8a3",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "10405a8312589a96",
+                "3bac4de58fa84c39"
+            ]
+        ]
+    },
+    {
+        "id": "cd06258896ba4e43",
+        "type": "change",
+        "z": "bb1c54631bee40cc",
+        "name": "toNumber",
+        "rules": [],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 220,
+        "wires": [
+            [
+                "b1243ffd4e44d77c"
+            ]
+        ]
+    },
+    {
+        "id": "10405a8312589a96",
+        "type": "split",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "splt": ",",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 390,
+        "y": 220,
+        "wires": [
+            [
+                "cd06258896ba4e43"
+            ]
+        ]
+    },
+    {
+        "id": "b1243ffd4e44d77c",
+        "type": "switch",
+        "z": "bb1c54631bee40cc",
+        "name": "route",
+        "property": "parts.index",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 690,
+        "y": 220,
+        "wires": [
+            [
+                "c96d21c2d5913c56",
+                "4a0c16479cf49836"
+            ],
+            [
+                "b84aad0de030accf",
+                "ce4ef75ccd86bd44"
+            ]
+        ]
+    },
+    {
+        "id": "c96d21c2d5913c56",
+        "type": "ui_gauge",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "group": "dfc653fe.ed6cf",
+        "order": 3,
+        "width": 6,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Temperatura 1",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "24",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 960,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "b84aad0de030accf",
+        "type": "ui_gauge",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "group": "dfc653fe.ed6cf",
+        "order": 8,
+        "width": 6,
+        "height": 5,
+        "gtype": "gage",
+        "title": "Temperatura 2",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": "24",
+        "max": "50",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "className": "",
+        "x": 960,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "3bac4de58fa84c39",
+        "type": "debug",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "4a0c16479cf49836",
+        "type": "change",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temp1",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ce4ef75ccd86bd44",
+        "type": "change",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temp2",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 960,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9ff05d61579acd2b",
+        "type": "telegram receiver",
+        "z": "bb1c54631bee40cc",
+        "name": "bombon",
+        "bot": "27d60bec0ff375ce",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 200,
+        "y": 100,
+        "wires": [
+            [
+                "b8c5254472ae5fb2"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "b8c5254472ae5fb2",
+        "type": "debug",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "5955f17514044fac",
+        "type": "telegram command",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "command": "temp1",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "27d60bec0ff375ce",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 190,
+        "y": 440,
+        "wires": [
+            [
+                "c864042458b26020"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "37ddce437f35ae77",
+        "type": "telegram command",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "command": "temp2",
+        "description": "",
+        "registercommand": false,
+        "language": "",
+        "scope": "default",
+        "bot": "27d60bec0ff375ce",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 200,
+        "y": 560,
+        "wires": [
+            [
+                "3145463aad29c618"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c864042458b26020",
+        "type": "function",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "func": "var temp = flow.get(\"temp1\")\nmsg.payload={\n    \"chatId\": 1345127422,\n    \"type\": \"message\",\n    \"content\": \"Temperatura 1=\" + temp + \"°C\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "0dec2e788b8d00b5"
+            ]
+        ]
+    },
+    {
+        "id": "3145463aad29c618",
+        "type": "function",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "func": "var temp = flow.get(\"temp2\")\nmsg.payload={\n    \"chatId\": 1345127422,\n    \"type\": \"message\",\n    \"content\": \"Temperatura actual=\" + temp + \"°C\"\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "85354e5e26d80450"
+            ]
+        ]
+    },
+    {
+        "id": "0dec2e788b8d00b5",
+        "type": "telegram sender",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "bot": "27d60bec0ff375ce",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 640,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85354e5e26d80450",
+        "type": "telegram sender",
+        "z": "bb1c54631bee40cc",
+        "name": "",
+        "bot": "27d60bec0ff375ce",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 640,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0a04e91a95aab8a3",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "dfc653fe.ed6cf",
+        "type": "ui_group",
+        "name": "MQTT",
+        "tab": "444cb8a6d47dd350",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "27d60bec0ff375ce",
+        "type": "telegram bot",
+        "botname": "bombona_bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "444cb8a6d47dd350",
+        "type": "ui_tab",
+        "name": "MQTT",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
